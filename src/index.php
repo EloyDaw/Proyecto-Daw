@@ -35,10 +35,47 @@ try {
     <meta charset="UTF-8">
     <title>Gestor de Visitas - CRUD</title>
     <style>
-        body { font-family: Arial; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background: #f0f0f0; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 2px;
+            cursor: pointer;
+        }
+        .btn-add {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
     </style>
 </head>
 <body>
