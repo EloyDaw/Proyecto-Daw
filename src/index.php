@@ -81,7 +81,7 @@ try {
     </style>
 </head>
 <body>
-    <h1>Gestor de Visitas v2.0</h1>
+    <h1>Gestor de Visitas "Nueva Version"</h1>
     <p><strong>Total de visitas registradas: <?= $count ?></strong></p>
     
     <form method="POST">
