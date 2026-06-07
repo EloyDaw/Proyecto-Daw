@@ -10,6 +10,7 @@ try {
     $pdo->exec("CREATE TABLE IF NOT EXISTS visitas (
         id INT AUTO_INCREMENT PRIMARY KEY,
         ip VARCHAR(45),
+        pagina VARCHAR(100) DEFAULT 'index.php',
         ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
@@ -21,6 +22,7 @@ try {
             $pdo->prepare("DELETE FROM visitas WHERE id = ?")->execute([$_POST['id']]);
         } elseif (isset($_POST['add'])) {
             $ip = $_SERVER['REMOTE_ADDR'];
+            $pagina = $_SERVER['REQUEST_URI'];
             $pdo->prepare("INSERT INTO visitas (ip) VALUES (?)")->execute([$ip]);
         }
     }
@@ -35,27 +37,71 @@ try {
     <meta charset="UTF-8">
     <title>Gestor de Visitas - CRUD</title>
     <style>
-        body { font-family: Arial; margin: 20px; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { border: 1px solid #ccc; padding: 8px; text-align: left; }
-        th { background: #f0f0f0; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        button {
+            padding: 8px 12px;
+            margin: 2px;
+            cursor: pointer;
+        }
+        .btn-add {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+        }
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+        }
     </style>
 </head>
 <body>
     <h1>Gestor de Visitas</h1>
-    <p>Total de visitas: <strong><?= $count ?></strong></p>
-
+    <p><strong>Total de visitas registradas: <?= $count ?></strong></p>
+    
     <form method="POST">
-        <button type="submit" name="add">Registrar Nueva Visita</button>
+        <button type="submit" name="add" class="btn-add">+ Registrar Nueva Visita (IP actual)</button>
     </form>
 
     <h2>Listado de Visitas</h2>
     <table>
-        <tr><th>ID</th><th>IP</th><th>Fecha y Hora</th><th>Acción</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Página</th>
+            <th>Fecha y Hora</th>
+            <th>Acción</th>
+        </tr>
         <?php foreach ($visitas as $v): ?>
         <tr>
             <td><?= $v['id'] ?></td>
             <td><?= htmlspecialchars($v['ip']) ?></td>
+            <td><?= htmlspecialchars($v['pagina']) ?></td>
             <td><?= $v['ts'] ?></td>
             <td>
                 <form method="POST" style="display:inline;">
