@@ -6,7 +6,7 @@ Página simple que registra visitas en MySQL.
 
 1. Asegúrate de tener los siguientes archivos:
    
-   - `docker-compose.yml` (el que ya tienes)
+   - `docker-compose.yml`
    - `Caddyfile`
    - Carpeta `src/` con tu `index.php` dentro
    - Carpeta `php/` con tu `Dockerfile` para PHP
