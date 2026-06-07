@@ -82,10 +82,10 @@ try {
 </head>
 <body>
     <h1>Gestor de Visitas</h1>
-    <p>Total de visitas: <strong><?= $count ?></strong></p>
-
+    <p><strong>Total de visitas registradas: <?= $count ?></strong></p>
+    
     <form method="POST">
-        <button type="submit" name="add">Registrar Nueva Visita</button>
+        <button type="submit" name="add" class="btn-add">+ Registrar Nueva Visita (IP actual)</button>
     </form>
 
     <h2>Listado de Visitas</h2>
