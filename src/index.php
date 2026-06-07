@@ -89,7 +89,29 @@ try {
     </form>
 
     <h2>Listado de Visitas</h2>
-    
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Página</th>
+            <th>Fecha y Hora</th>
+            <th>Acción</th>
+        </tr>
+        <?php foreach ($visitas as $v): ?>
+        <tr>
+            <td><?= $v['id'] ?></td>
+            <td><?= htmlspecialchars($v['ip']) ?></td>
+            <td><?= htmlspecialchars($v['pagina']) ?></td>
+            <td><?= $v['ts'] ?></td>
+            <td>
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="id" value="<?= $v['id'] ?>">
+                    <button type="submit" name="delete" onclick="return confirm('¿Eliminar?')">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        <?php endforeach; ?>
+    </table>
 </body>
 </html>
 
