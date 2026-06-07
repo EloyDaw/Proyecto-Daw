@@ -10,6 +10,7 @@ try {
     $pdo->exec("CREATE TABLE IF NOT EXISTS visitas (
         id INT AUTO_INCREMENT PRIMARY KEY,
         ip VARCHAR(45),
+        pagina VARCHAR(100) DEFAULT 'index.php',
         ts TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     )");
 
@@ -21,6 +22,7 @@ try {
             $pdo->prepare("DELETE FROM visitas WHERE id = ?")->execute([$_POST['id']]);
         } elseif (isset($_POST['add'])) {
             $ip = $_SERVER['REMOTE_ADDR'];
+            $pagina = $_SERVER['REQUEST_URI'];
             $pdo->prepare("INSERT INTO visitas (ip) VALUES (?)")->execute([$ip]);
         }
     }
@@ -88,11 +90,18 @@ try {
 
     <h2>Listado de Visitas</h2>
     <table>
-        <tr><th>ID</th><th>IP</th><th>Fecha y Hora</th><th>Acción</th></tr>
+        <tr>
+            <th>ID</th>
+            <th>IP</th>
+            <th>Página</th>
+            <th>Fecha y Hora</th>
+            <th>Acción</th>
+        </tr>
         <?php foreach ($visitas as $v): ?>
         <tr>
             <td><?= $v['id'] ?></td>
             <td><?= htmlspecialchars($v['ip']) ?></td>
+            <td><?= htmlspecialchars($v['pagina']) ?></td>
             <td><?= $v['ts'] ?></td>
             <td>
                 <form method="POST" style="display:inline;">
